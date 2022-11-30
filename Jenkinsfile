@@ -1,11 +1,5 @@
 pipeline {
     agent any
-    environment {
-        registry = "bar"
-    }
-    parameters {
-        choice(name: 'ACTION', choices: ['apply', 'destroy'], description: 'Pick something')
-    }
     stages {
         stage('Checkout') {
             steps {
