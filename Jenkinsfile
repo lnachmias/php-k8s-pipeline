@@ -19,6 +19,10 @@ pipeline {
                 sh ("docker push ${CREATED_REPO}:latest")
             }   
         }
-
+        stage('Apply Kubernetes Files') {
+            steps {
+                sh 'kubectl apply -f kube-config.yaml'
+            }
+        }
     }
 }

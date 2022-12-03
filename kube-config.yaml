@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-deployment
+  labels:
+    app: php
+spec:
+  # How much replicas of a pod it can run
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+      - name: php-server
+        image: lnachmias/php-webserver-example:latest
+        ports:
+        - containerPort: 3000
+          name: http-web-svc
+        #Mounts the volumes which are specified on volume-config.yaml
+---
+#Service file
+apiVersion: v1
+kind: Service
+metadata:
+  name: php-service
+spec:
+  selector:
+    app: php
+  #LoadBalancer automatically assigns a round-robin rule to the configuration
+  #Usually an Ingress rule assigns the type of Load Balancing, however, only an external LB was asked for this assignment
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 3000
+      name: http-web-svc
+      nodePort: 30000
