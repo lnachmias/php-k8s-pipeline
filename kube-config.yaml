@@ -18,10 +18,11 @@ spec:
       containers:
       - name: php-server
         image: lnachmias/php-webserver-example:latest
+        imagePullPolicy: Always
         ports:
-        - containerPort: 3000
-          name: http-web-svc
-        #Mounts the volumes which are specified on volume-config.yaml
+        - containerPort: 80
+        
+
 ---
 #Service file
 apiVersion: v1
@@ -31,11 +32,10 @@ metadata:
 spec:
   selector:
     app: php
-  #LoadBalancer automatically assigns a round-robin rule to the configuration
-  #Usually an Ingress rule assigns the type of Load Balancing, however, only an external LB was asked for this assignment
-  type: LoadBalancer
   ports:
-    - protocol: TCP
-      port: 3000
-      name: http-web-svc
-      nodePort: 30000
+    - name: http-web-svc
+      protocol: TCP
+      targetPort: 80
+      port: 80
+      nodePort: 30270
+  type: NodePort
