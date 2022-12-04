@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-            checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/lnachmias/php-k8s-pipeline']]])            
+            checkout([$class: 'GitSCM', branches: [[name: '*/Deploy']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/lnachmias/php-k8s-pipeline']]])            
 
           }
         }
