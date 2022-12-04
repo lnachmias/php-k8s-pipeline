@@ -22,8 +22,9 @@ pipeline {
         }
         stage('Apply Kubernetes Files') {
             steps {
-                sh "sed -i '' 's/latest/${BUILD_NUMBER}/' kube-config.yaml"
-                sh 'kubectl apply -f kube-config.yaml'
+                sh "sed -i '' 's/latest/${BUILD_NUMBER}/' deployment.yaml"
+                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f service.yaml'
             }
         }
     }

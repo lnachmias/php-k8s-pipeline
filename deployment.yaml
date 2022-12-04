@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-deployment
+  labels:
+    app: php
+spec:
+  # How much replicas of a pod it can run
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+      - name: php-server
+        image: lnachmias/php-webserver-example:26
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
