@@ -22,7 +22,9 @@ pipeline {
         }
         stage('Apply Kubernetes Files') {
             steps {
-                sh 'kubectl apply -f kube-config.yaml'
+                sh 'kubectl delete -f deployment.yaml'
+                sh 'kubectl apply -f deployment.yaml'
+                sh 'kubectl apply -f services.yaml'
             }
         }
     }
