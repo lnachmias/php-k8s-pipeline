@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Apply Kubernetes Files') {
             steps {
-                sh 'kubectl delete -f kube-config.yaml'
+                sh "sed -i 's/:latest/:${BUILD_NUMBER}' kube-config.yaml"
                 sh 'kubectl apply -f kube-config.yaml'
             }
         }

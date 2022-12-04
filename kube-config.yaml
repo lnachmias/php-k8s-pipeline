@@ -5,7 +5,6 @@ metadata:
   labels:
     app: php
 spec:
-  # How much replicas of a pod it can run
   replicas: 1
   selector:
     matchLabels:
@@ -16,11 +15,11 @@ spec:
         app: php
     spec:
       containers:
-      - name: php-server
-        image: lnachmias/php-webserver-example:latest
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 80
+        - name: php-server
+          image: 'lnachmias/php-webserver-example:latest'
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
 
 
 #Service file
