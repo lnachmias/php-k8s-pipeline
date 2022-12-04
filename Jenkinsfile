@@ -13,10 +13,11 @@ pipeline {
                 script {
                 CREATED_REPO = "lnachmias/php-webserver-example"
                 echo "URL of the newly created repository -->  ${CREATED_REPO}"
+                echo "URL of the current build # -->  ${BUILD_NUMBER}"
                 } 
                 sh ("docker build -t app-image .")
-                sh ("docker tag app-image:latest ${CREATED_REPO}:latest")
-                sh ("docker push ${CREATED_REPO}:latest")
+                sh ("docker tag app-image:latest ${CREATED_REPO}:${BUILD_NUMBER}")
+                sh ("docker push ${CREATED_REPO}:${BUILD_NUMBER}")
             }   
         }
         stage('Apply Kubernetes Files') {
