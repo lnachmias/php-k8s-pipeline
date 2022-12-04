@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: php-server
-        image: lnachmias/php-webserver-example:26
+        image: lnachmias/php-webserver-example:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
