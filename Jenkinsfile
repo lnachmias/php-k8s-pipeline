@@ -16,13 +16,14 @@ pipeline {
                 echo "URL of the current build # -->  ${BUILD_NUMBER}"
                 } 
                 sh ("docker build -t app-image .")
-                sh ("docker tag app-image:latest ${CREATED_REPO}:latest")
-                sh ("docker push ${CREATED_REPO}:latest")
+                sh 
+                sh ("docker tag app-image:latest ${CREATED_REPO}:${BUILD_NUMBER}")
+                sh ("docker push ${CREATED_REPO}:${BUILD_NUMBER}")
             }   
         }
         stage('Apply Kubernetes Files') {
             steps {
-                sh "sed -i '' 's/latest/${BUILD_NUMBER}/' deployment.yaml"
+                sh "sed -i 's/latest/${BUILD_NUMBER}/g' deployment.yaml"
                 sh 'kubectl apply -f deployment.yaml'
                 sh 'kubectl apply -f service.yaml'
             }
