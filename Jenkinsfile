@@ -16,7 +16,6 @@ pipeline {
                 echo "URL of the current build # -->  ${BUILD_NUMBER}"
                 } 
                 sh ("docker build -t app-image .")
-                sh 
                 sh ("docker tag app-image:latest ${CREATED_REPO}:${BUILD_NUMBER}")
                 sh ("docker push ${CREATED_REPO}:${BUILD_NUMBER}")
             }   
