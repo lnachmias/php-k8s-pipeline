@@ -16,8 +16,8 @@ pipeline {
                 echo "URL of the current build # -->  ${BUILD_NUMBER}"
                 } 
                 sh ("docker build -t app-image .")
-                sh ("docker tag app-image:latest ${CREATED_REPO}:${BUILD_NUMBER}")
-                sh ("docker push ${CREATED_REPO}:${BUILD_NUMBER}")
+                sh ("docker tag app-image:latest ${CREATED_REPO}:latest")
+                sh ("docker push ${CREATED_REPO}:latest")
             }   
         }
         stage('Apply Kubernetes Files') {
